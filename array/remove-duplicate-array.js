@@ -16,6 +16,11 @@ const removeDuplicates = (nums) => {
 
     i++;
   }
+
+  for (let j = newArr.length; j < n; j++) {
+    newArr[j] = '_';
+  }
+
   return newArr;
 };
 
