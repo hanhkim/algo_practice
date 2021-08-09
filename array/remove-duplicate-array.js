@@ -5,23 +5,15 @@
  * @return {number}
  */
 const removeDuplicates = (nums) => {
-  let i = 1;
-  let n = nums.length;
-  let newArr = [nums[0]];
-
-  while (i < n) {
-    if (newArr[newArr.length - 1] !== nums[i]) {
-      newArr.push(nums[i]);
+  let i = 0;
+  while (i < nums.length) {
+    if (nums[i + 1] === nums[i]) {
+      nums.splice(i, 1);
+      i--;
     }
-
     i++;
   }
-
-  for (let j = newArr.length; j < n; j++) {
-    newArr[j] = '_';
-  }
-
-  return newArr;
+  return nums.length;
 };
 
 const arr = [1, 2, 2, 2, 3, 4, 4, 5];
