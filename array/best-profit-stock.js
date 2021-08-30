@@ -18,14 +18,13 @@ const maxProfit = (prices) => {
         profit += prices[i] - prices[buyDate];
         buyDate = -1; // not have stock now
       }
-      i++;
     } else {
       // observe to buy
       if (buyDate === -1) {
         buyDate = i;
       }
-      i++;
     }
+    i++;
   }
 
   // sale day is last in range
@@ -36,5 +35,5 @@ const maxProfit = (prices) => {
   return profit;
 };
 
-const prices = [7, 1, 5, 3, 6, 4];
+const prices = [7, 6, 4, 3, 1];
 console.log(maxProfit(prices));
