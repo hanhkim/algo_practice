@@ -11,7 +11,6 @@ const maxProfit = (prices) => {
 
   while (i < n) {
     if (prices[i] >= prices[i - 1]) {
-      // bought => sale
       profit += prices[i] - prices[i - 1];
     }
     i++;
