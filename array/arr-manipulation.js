@@ -1,35 +1,43 @@
-// https://www.hackerrank.com/challenges/crush/problem?h_l=interview&playlist_slugs[0]=interview-preparation-kit&playlist_slugs[1]=arrays&fbclid=IwAR2LdBgSdUlk4M9WvEd-qOR0fGZX4Lwzf9tF31hcKIC80bEv2Kv6LEwuNb4
+function processData(input) {
+  var splitInput = input.split('\n');
+  var listSize = parseInt(splitInput[0].split(' ')[0]);
+  var numInserts = parseInt(splitInput[0].split(' ')[1]);
+  var max = 0;
+  var amounts = Array(listSize);
 
-/*
- * Complete the 'arrayManipulation' function below.
- *
- * The function is expected to return a LONG_INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER n
- *  2. 2D_INTEGER_ARRAY queries
- */
+  for (var i = 0; i < numInserts; i++) {
+    // input is 1 based
+    var start = parseInt(splitInput[i + 1].split(' ')[0]) - 1;
+    var end = parseInt(splitInput[i + 1].split(' ')[1]);
+    var amount = parseInt(splitInput[i + 1].split(' ')[2]);
 
-function arrayManipulation(n, queries) {
-  // Write your code here
+    amounts[start] = amounts[start] || 0;
+    amounts[start] = amounts[start] + amount;
 
-  let filledArr = new Array(n).fill(0);
+    amounts[end] = amounts[end] || 0;
+    amounts[end] = amounts[end] - amount;
+  }
 
-  queries.forEach((query) => {
-    let [a, b, k] = query;
-    for (let i = a - 1; i <= b - 1; i++) {
-      filledArr[i] += k;
+  var current = 0;
+  for (var i = 0; i < listSize; i++) {
+    current += amounts[i] || 0;
+    if (current > max) {
+      max = current;
     }
-  });
+  }
 
-  return Math.max(...filledArr);
+  console.log(max);
 }
 
-const queries = [
-  [1, 5, 3],
-  [4, 8, 7],
-  [6, 9, 1],
-];
+process.stdin.resume();
+process.stdin.setEncoding('ascii');
+_input = '';
+process.stdin.on('data', function (input) {
+  console.log('hanh: ', input);
+  _input += input;
+  processData(_input);
+});
 
-const max = arrayManipulation(10, queries);
-
-console.log(max);
+process.stdin.on('end', function () {
+  processData(_input);
+});
