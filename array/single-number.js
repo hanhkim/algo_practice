@@ -5,13 +5,12 @@
  * @return {number}
  */
 var singleNumber = function (nums) {
-  let single;
-  nums.forEach((num) => {
-    const indexsNum = nums.filter((n) => n === num);
-    if (indexsNum.length === 1) single = indexsNum[0];
-  });
-  return single;
+  let result = 0;
+  for (let i = 0; i < nums.length; i++) {
+    result ^= nums[i];
+  }
+  return result;
 };
 
-const nums = [2, 2, 1];
+const nums = [2, 2, 1, 3, 4, 3, 4];
 console.log(singleNumber(nums));
