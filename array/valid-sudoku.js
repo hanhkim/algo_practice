@@ -12,10 +12,12 @@ const checkDuplicateDigit = (arr) => {
   return false;
 };
 
-const checkValidArray = (arr) => {
+const checkValidArray = (arr, isCheckDigit = false) => {
   const newArray = arr.filter((a) => a != '.');
   //check digit from 1- 9
-  if (checkInvalidDigit(newArray)) return false;
+  if (isCheckDigit) {
+    if (checkInvalidDigit(newArray)) return false;
+  }
 
   // check distinguish element
   if (checkDuplicateDigit(newArray)) return false;
@@ -27,7 +29,7 @@ const checkRow = (sudokuBoard) => {
   let particleArray = [];
   for (let i = 0; i < 9; i++) {
     particleArray = sudokuBoard[i];
-    if (!checkValidArray(particleArray)) {
+    if (!checkValidArray(particleArray, true)) {
       return false;
     }
   }
@@ -51,11 +53,9 @@ const checkVertical = (sudokuBoard) => {
 const checkBoard3x3 = (sudokuBoard) => {
   let particleArray = [];
 
-  // 0; 3; 6
   for (let v = 0; v < 9; v = v + 3) {
     for (let r = 0; r < 9; r = r + 3) {
       particleArray = [];
-      // 0; 3; 6
       for (let i = r; i < r + 3; i++) {
         for (let j = v; j < v + 3; j++) {
           particleArray.push(sudokuBoard[j][i]);
@@ -78,20 +78,8 @@ const isValidSudoku = (sudokuBoard) => {
   return false;
 };
 
-const sudokuBoard = [
-  ['8', '3', '.', '.', '7', '.', '.', '.', '.'],
-  ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
-  ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
-  ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
-  ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
-  ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
-  ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
-  ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
-  ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
-];
-
 // const sudokuBoard = [
-//   ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+//   ['8', '3', '.', '.', '7', '.', '.', '.', '.'],
 //   ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
 //   ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
 //   ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
@@ -101,5 +89,16 @@ const sudokuBoard = [
 //   ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
 //   ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
 // ];
+const sudokuBoard = [
+  ['.', '8', '7', '6', '5', '4', '3', '2', '1'],
+  ['2', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['3', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['4', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['5', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['6', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['7', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['8', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['9', '.', '.', '.', '.', '.', '.', '.', '.'],
+];
 
 console.log(isValidSudoku(sudokuBoard));
